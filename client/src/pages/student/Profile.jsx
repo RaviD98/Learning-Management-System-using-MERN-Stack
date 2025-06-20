@@ -20,15 +20,12 @@ import {
 } from "@/features/api/authApi";
 import { toast } from "sonner";
 
-
 const Profile = () => {
   const [name, setName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
-  
+
   const { data, isLoading, refetch } = useLoadUserQuery();
-  // if (isLoading || !data?.user) return <h1>Loading Profile...</h1>;
   
-  // const user = data.user;
   const [
     updateUser,
     {
@@ -59,10 +56,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    // if (isSuccess) {
-    //   refetch();
-    //   toast.success(data.message || "Profile updated.");
-    // }
+ 
     if (isSuccess) {
       refetch();
       toast.success(updateUserData?.message || "Profile updated.");
@@ -73,14 +67,10 @@ const Profile = () => {
     }
   }, [error, updateUserData, isSuccess, isError]);
 
-  // if (isLoading) return <h1>Profile Loading...</h1>;
-
-  // const user = data && data.user;
 
   if (isLoading || !data?.user) return <h1>Loading Profile...</h1>;
 
-  const user = data.user;
-
+  const user = data && data.user;
 
   console.log(user);
 
