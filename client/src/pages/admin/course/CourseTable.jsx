@@ -1,12 +1,17 @@
 import { Button } from "@/components/ui/button";
 import {
   Table,
+  TableBody,
   TableCaption,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetCreatorCourseQuery } from "@/features/api/courseApi";
+import { Edit } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const invoices = [
   {
@@ -54,6 +59,8 @@ const invoices = [
 ];
 
 const CourseTable = () => {
+const { data, isLoading } = useGetCreatorCourseQuery();
+const navigate = useNavigate();
 
   return (
     <div>
@@ -68,6 +75,29 @@ const CourseTable = () => {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
+        <TableBody>
+          {data.courses.map((course) => (
+            <TableRow key={course._id}>
+              <TableCell className="font-medium">
+                {course?.coursePrice || "NA"}
+              </TableCell>
+              <TableCell>
+                {" "}
+                <Badge>{course.isPublished ? "Published" : "Draft"}</Badge>{" "}
+              </TableCell>
+              <TableCell>{course.courseTitle}</TableCell>
+              <TableCell className="text-right">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => navigate(`${course._id}`)}
+                >
+                  <Edit />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </div>
   );
