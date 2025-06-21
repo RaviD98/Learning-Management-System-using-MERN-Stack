@@ -18,12 +18,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  useEditCourseMutation,
-} from "@/features/api/courseApi";
+import { useEditCourseMutation } from "@/features/api/courseApi";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const CourseTab = () => {
@@ -37,9 +35,28 @@ const CourseTab = () => {
     courseThumbnail: "",
   });
 
-    const params = useParams();
-    const courseId = params.courseId;
+  const params = useParams();
+  const courseId = params.courseId;
+  const {
+    data: courseByIdData,
+    isLoading: courseByIdLoading,
+    refetch,
+  } = useGetCourseByIdQuery(courseId);
 
+  useEffect(() => {
+    if (courseByIdData?.course) {
+      const course = courseByIdData?.course;
+      setInput({
+        courseTitle: course.courseTitle,
+        subTitle: course.subTitle,
+        description: course.description,
+        category: course.category,
+        courseLevel: course.courseLevel,
+        coursePrice: course.coursePrice,
+        courseThumbnail: "",
+      });
+    }
+  }, [courseByIdData]);
 
   const [previewThumbnail, setPreviewThumbnail] = useState("");
   const navigate = useNavigate();
@@ -70,17 +87,16 @@ const CourseTab = () => {
   };
 
   const updateCourseHandler = async () => {
-    
-      const formData = new FormData();
-      formData.append("courseTitle", input.courseTitle);
-      formData.append("subTitle", input.subTitle);
-      formData.append("description", input.description);
-      formData.append("category", input.category);
-      formData.append("courseLevel", input.courseLevel);
-      formData.append("coursePrice", input.coursePrice);
-      formData.append("courseThumbnail", input.courseThumbnail);
+    const formData = new FormData();
+    formData.append("courseTitle", input.courseTitle);
+    formData.append("subTitle", input.subTitle);
+    formData.append("description", input.description);
+    formData.append("category", input.category);
+    formData.append("courseLevel", input.courseLevel);
+    formData.append("coursePrice", input.coursePrice);
+    formData.append("courseThumbnail", input.courseThumbnail);
 
-      await editCourse({ formData, courseId });
+    await editCourse({ formData, courseId });
   };
 
   useEffect(() => {
