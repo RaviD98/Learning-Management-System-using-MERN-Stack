@@ -18,6 +18,12 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Creator_Course"],
     }),
+    getPublishedCourse: builder.query({
+      query: () => ({
+        url: "/published-courses",
+        method: "GET",
+      }),
+    }),
     getCreatorCourse: builder.mutation({
       query: () => ({
         url: "/",
@@ -79,7 +85,14 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+    publishCourse: builder.mutation({
+      query: ({ courseId, query }) => ({
+        url: `/${courseId}?publish=${query}`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
-export const { useCreateCourseMutation, useGetCreatorCourseMutation, useEditCourseMutation, useGetCourseByIdQuery, useCreateLectureMutation, useEditLectureMutation, useRemoveLectureMutation, useGetLectureByIdQuery } = courseApi;
+export const { useCreateCourseMutation,
+  useGetPublishedCourseQuery, useGetCreatorCourseMutation, useEditCourseMutation, useGetCourseByIdQuery, useCreateLectureMutation, useEditLectureMutation, useRemoveLectureMutation, useGetLectureByIdQuery, usePublishCourseMutation } = courseApi;

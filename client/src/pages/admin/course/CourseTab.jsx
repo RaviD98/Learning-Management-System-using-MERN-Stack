@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEditCourseMutation } from "@/features/api/courseApi";
+import { useEditCourseMutation, usePublishCourseMutation } from "@/features/api/courseApi";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -42,6 +42,8 @@ const CourseTab = () => {
     isLoading: courseByIdLoading,
     refetch,
   } = useGetCourseByIdQuery(courseId);
+
+  const [publishCourse, {}] = usePublishCourseMutation();
 
   useEffect(() => {
     if (courseByIdData?.course) {
@@ -97,6 +99,18 @@ const CourseTab = () => {
     formData.append("courseThumbnail", input.courseThumbnail);
 
     await editCourse({ formData, courseId });
+  };
+
+  const publishStatusHandler = async (action) => {
+    try {
+      const response = await publishCourse({ courseId, query: action });
+      if (response.data) {
+        refetch();
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to publish or unpublish course");
+    }
   };
 
   useEffect(() => {
