@@ -25,7 +25,6 @@ const Profile = () => {
   const [profilePhoto, setProfilePhoto] = useState("");
 
   const { data, isLoading, refetch } = useLoadUserQuery();
-  
   const [
     updateUser,
     {
@@ -56,19 +55,16 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
- 
     if (isSuccess) {
       refetch();
-      toast.success(updateUserData?.message || "Profile updated.");
+      toast.success(data.message || "Profile updated.");
     }
-
     if (isError) {
       toast.error(error.message || "Failed to update profile");
     }
   }, [error, updateUserData, isSuccess, isError]);
 
-
-  if (isLoading || !data?.user) return <h1>Loading Profile...</h1>;
+  if (isLoading) return <h1>Profile Loading...</h1>;
 
   const user = data && data.user;
 
