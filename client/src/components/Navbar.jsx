@@ -56,8 +56,7 @@ const Navbar = () => {
         </div>
         {/* User icons and dark mode icon  */}
         <div className="flex items-center gap-8">
-{          console.log(user)
-}          {user ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar>

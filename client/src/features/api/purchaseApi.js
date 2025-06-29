@@ -31,7 +31,6 @@ export const purchaseApi = createApi({
   }),
 });
 
-
 export const {
   useCreateCheckoutSessionMutation,
   useGetCourseDetailWithStatusQuery,
