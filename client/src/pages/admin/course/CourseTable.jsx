@@ -1,9 +1,11 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -59,8 +61,10 @@ const invoices = [
 ];
 
 const CourseTable = () => {
-const { data, isLoading } = useGetCreatorCourseQuery();
-const navigate = useNavigate();
+  const { data, isLoading } = useGetCreatorCourseQuery();
+  const navigate = useNavigate();
+
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div>
