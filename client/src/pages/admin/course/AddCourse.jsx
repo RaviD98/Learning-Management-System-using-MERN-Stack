@@ -30,16 +30,16 @@ const AddCourse = () => {
   };
 
   const createCourseHandler = async () => {
-     createCourse({ courseTitle, category });
+    await createCourse({ courseTitle, category });
   };
 
-    // for displaying toast
-    useEffect(() => {
-      if (isSuccess) {
-        toast.success(data?.message || "Course created.");
-        navigate("/admin/course");
-      }
-    }, [isSuccess, error]);
+  // for displaying toast
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message || "Course created.");
+      navigate("/admin/course");
+    }
+  }, [isSuccess, error]);
 
   return (
     <div className="flex-1 mx-10">
