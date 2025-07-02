@@ -28,6 +28,7 @@ const CreateLecture = () => {
   } = useGetCourseLectureQuery(courseId);
 
   const createLectureHandler = async () => {
+    console.log("Sending lecture:", { lectureTitle, courseId });
     await createLecture({ lectureTitle, courseId });
   };
 

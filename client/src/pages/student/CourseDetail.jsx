@@ -29,10 +29,10 @@ const CourseDetail = () => {
   console.log(purchased);
 
   const handleContinueCourse = () => {
-    if(purchased){
-      navigate(`/course-progress/${courseId}`)
+    if (purchased) {
+      navigate(`/course-progress/${courseId}`);
     }
-  }
+  };
 
   return (
     <div className="space-y-5">
@@ -86,7 +86,7 @@ const CourseDetail = () => {
                 <ReactPlayer
                   width="100%"
                   height={"100%"}
-                  url={course.lectures[0].videoUrl}
+                  url={course.lectures[0]?.videoUrl}
                   controls={true}
                 />
               </div>
@@ -96,7 +96,9 @@ const CourseDetail = () => {
             </CardContent>
             <CardFooter className="flex justify-center p-4">
               {purchased ? (
-                <Button onClick={handleContinueCourse} className="w-full">Continue Course</Button>
+                <Button onClick={handleContinueCourse} className="w-full">
+                  Continue Course
+                </Button>
               ) : (
                 <BuyCourseButton courseId={courseId} />
               )}
