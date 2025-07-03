@@ -86,7 +86,6 @@ export const logout = async (_, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
-console.log("User ID from req.id:", req.id);
     const user = await User.findById(userId)
       .select("-password")
       .populate("enrolledCourses");
@@ -136,17 +135,16 @@ export const updateProfile = async (req, res) => {
       new: true,
     }).select("-password");
 
-    // return res.status(200).json({
-    //   success: true,
-    //   user: updatedUser,
-    //   message: "Profile updated successfully.",
-    // });
-    res.status(200).json({ message: "Profile updated", user });
-
+    return res.status(200).json({
+      success: true,
+      user: updatedUser,
+      message: "Profile updated successfully.",
+    });
   } catch (error) {
-console.error("Error in /profile:", err);
-    return res.status(500).json({ message: "Internal Server Error", error: err.message 
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update profile",
     });
   }
 };
-
