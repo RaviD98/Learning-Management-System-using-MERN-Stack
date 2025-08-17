@@ -9,12 +9,16 @@ export const generateToken = (res, user, message) => {
     .status(200)
     .cookie("token", token, {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === "production",
     })
     .json({
       success: true,
       message,
-      user,
+      user: {
+        ...user._doc,
+        password: undefined, 
+      },
     });
 };

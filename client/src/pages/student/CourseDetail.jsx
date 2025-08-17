@@ -17,7 +17,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const CourseDetail = () => {
   const params = useParams();
-  const courseId = params.courseId;
+  const courseId = params?.courseId;
   const navigate = useNavigate();
   const { data, isLoading, isError } =
     useGetCourseDetailWithStatusQuery(courseId);
