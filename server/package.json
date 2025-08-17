@@ -1,10 +1,11 @@
 {
-  "name": "server",
+  "name": "index",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start" : "node index.js"
   },
   "keywords": [],
   "author": "",
