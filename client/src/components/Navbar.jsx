@@ -11,7 +11,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import DarkMode from "@/DarkMode";
+import DarkMode from "../Darkmode";
 import {
   Sheet,
   SheetClose,
