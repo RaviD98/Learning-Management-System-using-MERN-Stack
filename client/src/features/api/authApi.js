@@ -1,7 +1,10 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../authSlice";
 
-const USER_API = "http://localhost:8080/api/v1/users/"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/";
+export const USER_API = `${BACKEND_URL}api/v1/users/`;
+// This is the base URL for the user-related API endpoints
+// It can be configured via environment variables, defaulting to a local server URL.
 
 export const authApi = createApi({
     reducerPath:"authApi",
