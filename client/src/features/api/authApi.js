@@ -3,14 +3,16 @@ import { userLoggedIn, userLoggedOut } from "../authSlice";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/";
 export const USER_API = `${BACKEND_URL}api/v1/users/`;
-// This is the base URL for the user-related API endpoints
-// It can be configured via environment variables, defaulting to a local server URL.
 
 export const authApi = createApi({
     reducerPath:"authApi",
     baseQuery:fetchBaseQuery({
         baseUrl:USER_API,
-        credentials:'include'
+        credentials:'include',
+        prepareHeaders: (headers) => {
+            headers.set('Content-Type', 'application/json');
+            return headers;
+        },
     }),
     endpoints: (builder) => ({
         registerUser: builder.mutation({
@@ -66,12 +68,12 @@ export const authApi = createApi({
             query: (formData) => ({
                 url:"profile/update",
                 method:"PUT",
-                body:formData,
-                credentials:"include"
+                body:formData
             })
         })
     })
 });
+
 export const {
     useRegisterUserMutation,
     useLoginUserMutation,
