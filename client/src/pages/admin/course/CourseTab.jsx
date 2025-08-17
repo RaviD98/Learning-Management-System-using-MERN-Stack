@@ -159,7 +159,7 @@ const CourseTab = () => {
             <Input
               type="text"
               name="courseTitle"
-              value={input.courseTitle}
+              value={input?.courseTitle}
               onChange={changeEventHandler}
               placeholder="Ex. Fullstack developer"
             />
@@ -169,7 +169,7 @@ const CourseTab = () => {
             <Input
               type="text"
               name="subTitle"
-              value={input.subTitle}
+              value={input?.subTitle}
               onChange={changeEventHandler}
               placeholder="Ex. Become a Fullstack developer from zero to hero in 2 months"
             />
@@ -235,7 +235,7 @@ const CourseTab = () => {
               <Input
                 type="number"
                 name="coursePrice"
-                value={input.coursePrice}
+                value={input?.coursePrice}
                 onChange={changeEventHandler}
                 placeholder="199"
                 className="w-fit"
