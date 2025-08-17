@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Define the base URL for the course progress-related API endpoints
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/";
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/";
 export const COURSE_PROGRESS_API = `${BACKEND_URL}api/v1/progress/`;
 
 export const courseProgressApi = createApi({
